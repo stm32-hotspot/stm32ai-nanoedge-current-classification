@@ -1,0 +1,20 @@
+
+
+#include "NanoEdgeAI.h"
+#include "knowledge.h"
+
+#define SIGNAL_SIZE  (uint32_t)(DATA_INPUT_USER * AXIS_NUMBER)
+
+
+void Inference(void);
+
+
+void Inference(void)
+{
+  uint16_t id_class;
+
+  FillBuffer(input_user_buffer,SIGNAL_SIZE);
+  neai_classification(input_user_buffer,output_class_buffer,&id_class);
+  printf("Class: %s [%u%%]\r\n",id2class[id_class],(uint)(output_class_buffer[id_class-1]*100));
+}
+
